@@ -1,0 +1,4 @@
+<!--pages/chat/chat.wxml-->
+<input type="text" value="{{value}}" bindinput="onInputChange"></input>
+<button type="primary" bindtap="submit">提交</button>
+<text>{{socketMessage}}</text>
