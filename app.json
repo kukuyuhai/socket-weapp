@@ -1,8 +1,7 @@
 {
   "pages": [
     "pages/chat/chat",
-    "pages/index/index",
-    "pages/logs/logs"
+    "pages/index/index"
   ],
   "window": {
     "backgroundTextStyle": "light",

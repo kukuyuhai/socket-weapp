@@ -8,15 +8,81 @@ var that
 
 
 Page({
+  data: {
+    value: "",
+    show: false,
+    rightShow: false,
+    checked: true
+  },
 
   /**
    * 生命周期函数--监听页面加载
    */
   onLoad: function(options) {
     that = this
-    this.socketStart();
+    // this.socketStart();
+  },
+  onInputConfirm({
+    detail
+  }) {
+    // event.detail 为当前输入的值
+    this.setData({
+      value:""
+    })
+  },
+  /**
+   * 
+   */
+  bindShowActionSheets() {
+    this.setData({
+      show: true
+    });
   },
 
+  onClose() {
+    this.setData({
+      show: false
+    });
+  },
+  showEditContent() {
+    this.setData({
+      rightShow: true
+    });
+  },
+  onRightClose() {
+    this.setData({
+      rightShow: false
+    });
+  },
+  onSwitchChange({
+    detail
+  }) {
+    wx.showModal({
+      title: '提示',
+      content: '是否切换开关？',
+      success: res => {
+        if (res.confirm) {
+          this.setData({
+            checked: detail
+          });
+        }
+      }
+    });
+  },
+  setClipboard() {
+    wx.setClipboardData({
+      data: 'ok',
+      success(res) {
+        console.log(res);
+        if (res.errMsg === "setClipboardData:ok") {
+          wx.showToast({
+            title: '复制密码成功',
+            icon: 'none'
+          })
+        }
+      }
+    })
+  },
   /**
    * 启动socket
    */
@@ -134,5 +200,8 @@ Page({
     this.setData({
       value: ""
     })
+  },
+  onShareAppMessage(res) {
+    console.log(res)
   }
 })

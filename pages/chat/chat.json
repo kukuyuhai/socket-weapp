@@ -1,3 +1,14 @@
 {
-  "usingComponents": {}
+  "navigationBarBackgroundColor": "#F6F6F6",
+  "navigationBarTitleText": "控制台",
+  "usingComponents": {
+    "van-icon": "vant-weapp/icon/index",
+    "van-field": "vant-weapp/field/index",
+    "van-popup": "vant-weapp/popup/index",
+    "van-grid": "vant-weapp/grid/index",
+    "van-grid-item": "vant-weapp/grid-item/index",
+    "van-switch":"vant-weapp/switch/index",
+    "van-cell-group": "vant-weapp/cell-group/index",
+    "van-cell": "vant-weapp/cell/index"
+  }
 }

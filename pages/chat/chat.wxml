@@ -1,4 +1,50 @@
-<!--pages/chat/chat.wxml-->
-<input type="text" value="{{value}}" bindinput="onInputChange"></input>
-<button type="primary" bindtap="submit">提交</button>
-<text>{{socketMessage}}</text>
+<view class="mst-container">
+  <view class="mst-chatroom-container">
+    <view class="mst-focus-content">
+      <view class="mst-focus-left__block">left-icon</view>
+      <van-icon name="ellipsis" class="van-focus__icon" size="24" bind:click="showEditContent" />
+    </view>
+  </view>
+  <view class="mst-chatroom-bottom">
+    <van-field value="{{ value }}" class="mst-chatroom-input" type="text" placeholder="说点什么" border="{{ false }}" confirm-type="发送" bind:confirm="onInputConfirm" />
+    <van-icon size="24px" color="#666" name="add-o" class="van-field__icon-root" bind:click="bindShowActionSheets" />
+  </view>
+</view>
+
+
+<!-- actions -->
+<van-popup show="{{ show }}" position="bottom" custom-style="padding:20px 0;" round bind:close="onClose">
+  <van-grid gutter="{{ 10 }}" border="{{false}}">
+    <van-grid-item icon="photo-o" text="文字" wx:for="{{ 8 }}" wx:key="index" />
+  </van-grid>
+</van-popup>
+
+<!-- right Edit -->
+<van-popup overlay="{{false}}" show="{{ rightShow }}" safe-area-inset-top safe-area-inset-bottom position="right" closeable custom-class="right" bind:close="onRightClose">
+  <scroll-view scroll-y class="mst-setting-box">
+    <view class="mst-block-cell__title">话题详情</view>
+    <view class="mst-block-cell__group">
+      XXX
+    </view>
+    <van-cell-group title="主持人">
+      <view class="mst-block-cell__group">
+        <image src="https://wx.qlogo.cn/mmopen/vi_32/Q0j4TwGTfTLGy0iaWoybEHhKcx6XQUt6ZWlTpdbEvq6QibG8VEkGLP7c0mXwsJLoeAIUuxyAwEzpeHcIlvSQ2rUw/132" mode="asceptFill" class="mst-useravatar" wx:for="{{3}}" wx:key="index"></image>
+        <button class="mst-dashed-round" open-type="share">
+          <van-icon name="plus" size="16px" color="#eee" />
+        </button>
+      </view>
+    </van-cell-group>
+    <van-cell-group title="设置">
+      <van-cell title="是否群聊" custom-class="mst-switch-cell">
+        <van-switch checked="{{ checked }}" custom-class="mst-switch-cell__switch" />
+      </van-cell>
+      <van-cell title="参与用户是否绑定手机号" custom-class="mst-switch-cell">
+        <van-switch checked="{{ checked }}" custom-class="mst-switch-cell__switch" bind:change="onSwitchChange" />
+      </van-cell>
+      <van-cell title="私密房间" custom-class="mst-switch-cell" value="3g4vugC7" bind:click="setClipboard" isLink></van-cell>
+    </van-cell-group>
+  </scroll-view>
+  <view class="mst-dashboard-btn__fixed">
+    anniu
+  </view>
+</van-popup>
