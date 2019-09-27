@@ -5,29 +5,132 @@ var socketUrl = 'ws://localhost:3000?token=qwerqt'
 var socketMessage = ''
 // 上下文对象
 var that
-
+import {
+  cities
+} from './city';
 
 Page({
   data: {
-    value: "",
+    value: "提醒",
     show: false,
     rightShow: false,
-    checked: true
+    checked: true,
+    cities: [],
+    display: true,
+    focus: false,
+    actionSheetShow: false,
+    actions: [{
+        name: '选项'
+      },
+      {
+        name: '选项'
+      },
+      {
+        name: '选项',
+        subname: '描述信息',
+        openType: 'share'
+      }
+    ]
   },
+  onChange(event) {
+    console.log(event.detail, 'click right menu callback data')
+  },
+  onInputChange(e) {
+    const inputVal = e.detail;
+    const val = this.data.value.length;
+    this.setData({
+      value: inputVal
+    })
+    if (val > inputVal.length) return
+    const lastChar = inputVal.substr(inputVal.length - 1, 1);
+    const lstr = inputVal.substr(0, inputVal.length - 1)
+    var reg = new RegExp("^[A-Z_a-z0-9]+$");
+    const flag = reg.test(lstr);
+    if (!flag && lastChar === '@') {
+      wx.hideKeyboard({
+        complete: res => {
+          console.log('hideKeyboard res', res);
+          wx.setNavigationBarTitle({
+            title: '选择提醒的人'
+          })
+          this.setData({
+            display: false
+          })
+        }
+      })
 
+      this.setData({
+        display: false
+      })
+    }
+  },
   /**
-   * 生命周期函数--监听页面加载
+   * 关系提醒人列表
+   * 获取提醒人id和昵称
    */
-  onLoad: function(options) {
-    that = this
-    // this.socketStart();
+  closeContactList(e) {
+    console.log(e);
+    const name = e.currentTarget.dataset.uname;
+    wx.setNavigationBarTitle({
+      title: '控制台'
+    })
+    this.setData({
+      display: true,
+      value: `${this.data.value}${name} `
+    })
+  },
+  /**
+   * 
+   * 发送文本消息
+   * 
+   */
+  sendMessage() {
+    console.log("发送文本消息")
+  },
+  onSelect(event) {
+    console.log(event.detail);
+  },
+  onActionSheetsCancel(){
+    this.setData({
+      actionSheetShow: false
+    });
+  },
+  /**
+   * 
+   */
+  settingUserAttr() {
+    this.setData({
+      actionSheetShow: true
+    })
+  },
+  onReady() {
+    let storeCity = new Array(26);
+    const words = ["A", "B", "C", "D", "E", "F", "G", "H", "I", "J", "K", "L", "M", "N", "O", "P", "Q", "R", "S", "T", "U", "V", "W", "X", "Y", "Z"]
+    words.forEach((item, index) => {
+      storeCity[index] = {
+        key: item,
+        list: []
+      }
+    })
+    cities.forEach((item) => {
+      let firstName = item.pinyin.substring(0, 1);
+      let index = words.indexOf(firstName);
+      storeCity[index].list.push({
+        name: item.name,
+        key: firstName
+      });
+    })
+    this.data.cities = storeCity;
+    this.setData({
+      cities: this.data.cities
+    })
   },
   onInputConfirm({
     detail
   }) {
     // event.detail 为当前输入的值
     this.setData({
-      value:""
+      value: ""
     })
   },
   /**
@@ -186,14 +289,6 @@ Page({
       socketMessage: socketMessage += '服务器返回数据 → ' + receivedStr + '\n\n'
     })
     // this.socketStop();
-  },
-
-  onInputChange(e) {
-    console.log(e);
-    const value = e.detail.value;
-    this.setData({
-      value: value
-    })
   },
   submit() {
     this.socketSendMessage(this.data.value);

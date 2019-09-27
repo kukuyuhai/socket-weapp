@@ -9,6 +9,12 @@
     "van-grid-item": "vant-weapp/grid-item/index",
     "van-switch":"vant-weapp/switch/index",
     "van-cell-group": "vant-weapp/cell-group/index",
-    "van-cell": "vant-weapp/cell/index"
+    "van-cell": "vant-weapp/cell/index"  ,
+    "i-index": "../../component/index/index",
+    "i-index-item": "../../component/index-item/index",
+    "van-button":"vant-weapp/button/index",
+    "van-row": "vant-weapp/row/index",
+    "van-col": "vant-weapp/col/index",
+    "van-action-sheet": "vant-weapp/action-sheet/index"
   }
 }

@@ -1,12 +1,34 @@
-<view class="mst-container">
+<!-- @联系人列表开始 -->
+<view class="mst-index-container" wx:if="{{!display}}">
+  <i-index height="100%" bind:change="onChange">
+    <i-index-item wx:for="{{ cities }}" wx:for-index="index" wx:key="{{index}}" wx:for-item="item" name="{{item.key}}">
+      <view class="mst-contact-list__item van-hairline--bottom" wx:for="{{item.list}}" data-uName="{{it.name}}" bindtap="closeContactList" wx:for-index="in" wx:key="{{in}}" wx:for-item="it">
+        {{it.name}}
+      </view>
+    </i-index-item>
+  </i-index>
+</view>
+<!-- @联系人列表结束 -->
+
+<view class="mst-container" style="{{display ? 'display:block;' : 'display:none;'}}">
   <view class="mst-chatroom-container">
     <view class="mst-focus-content">
-      <view class="mst-focus-left__block">left-icon</view>
+      <view class="mst-focus-left__block">
+        <view class="mst-left__block-item">
+          <van-icon name="star-o" size="18"></van-icon>
+        </view>
+        <view class="mst-left__block-item">
+          <van-icon name="manager-o" size="18" />
+        </view>
+        <view class="mst-left__block-item">
+          <van-icon name="star-o" size="18"></van-icon>
+        </view>
+      </view>
       <van-icon name="ellipsis" class="van-focus__icon" size="24" bind:click="showEditContent" />
     </view>
   </view>
   <view class="mst-chatroom-bottom">
-    <van-field value="{{ value }}" class="mst-chatroom-input" type="text" placeholder="说点什么" border="{{ false }}" confirm-type="发送" bind:confirm="onInputConfirm" />
+    <van-field value="{{ value }}" class="mst-chatroom-input" confirm-hold="{{ true }}" type="text" placeholder="说点什么" border="{{ false }}" confirm-type="发送" bind:confirm="onInputConfirm" bind:change="onInputChange" />
     <van-icon size="24px" color="#666" name="add-o" class="van-field__icon-root" bind:click="bindShowActionSheets" />
   </view>
 </view>
@@ -22,11 +44,25 @@
 <!-- right Edit -->
 <van-popup overlay="{{false}}" show="{{ rightShow }}" safe-area-inset-top safe-area-inset-bottom position="right" closeable custom-class="right" bind:close="onRightClose">
   <scroll-view scroll-y class="mst-setting-box">
-    <view class="mst-block-cell__title">话题详情</view>
-    <view class="mst-block-cell__group">
-      XXX
+    <van-cell-group title="项目信息">
+      <van-cell title="项目名称" value="关于服装体验的社会调研分析" isLink/>
+      <van-cell title="小程序分享码" custom-class="mst-switch-cell" isLink link-type="navigateTo" url="/pages/qrcode/qrcode">
+        <van-icon name="qr" size="24px" custom-class="mst-switch-cell__switch" />
+      </van-cell>
+      <van-cell title="项目公告" value="" label="描述信息" border="{{ false }}" />
+    </van-cell-group>
+    <view class="mst-block-cell__group" style="justify-content:space-around;margin-top:10px;">
+      <van-row>
+        <van-col span="4" wx:for="{{23}}">
+          <view class="mst-group-userinfo" bindtap="settingUserAttr">
+            <image class="mst-group-avatar" src="https://wx.qlogo.cn/mmopen/vi_32/Q0j4TwGTfTLGy0iaWoybEHhKcx6XQUt6ZWlTpdbEvq6QibG8VEkGLP7c0mXwsJLoeAIUuxyAwEzpeHcIlvSQ2rUw/132"></image>
+            <text class="mst-group-nickname">walker</text>
+          </view>
+        </van-col>
+      </van-row>
+      <view class="mst-group-user__more">查看更多成员 ></view>
     </view>
-    <van-cell-group title="主持人">
+    <van-cell-group title="邀请主持人">
       <view class="mst-block-cell__group">
         <image src="https://wx.qlogo.cn/mmopen/vi_32/Q0j4TwGTfTLGy0iaWoybEHhKcx6XQUt6ZWlTpdbEvq6QibG8VEkGLP7c0mXwsJLoeAIUuxyAwEzpeHcIlvSQ2rUw/132" mode="asceptFill" class="mst-useravatar" wx:for="{{3}}" wx:key="index"></image>
         <button class="mst-dashed-round" open-type="share">
@@ -34,17 +70,31 @@
         </button>
       </view>
     </van-cell-group>
+
     <van-cell-group title="设置">
       <van-cell title="是否群聊" custom-class="mst-switch-cell">
-        <van-switch checked="{{ checked }}" custom-class="mst-switch-cell__switch" />
+        <van-switch checked="{{ checked }}" active-color="#8ebdfa" custom-class="mst-switch-cell__switch" />
       </van-cell>
       <van-cell title="参与用户是否绑定手机号" custom-class="mst-switch-cell">
-        <van-switch checked="{{ checked }}" custom-class="mst-switch-cell__switch" bind:change="onSwitchChange" />
+        <van-switch checked="{{ checked }}" active-color="#8ebdfa" custom-class="mst-switch-cell__switch" bind:change="onSwitchChange" />
       </van-cell>
       <van-cell title="私密房间" custom-class="mst-switch-cell" value="3g4vugC7" bind:click="setClipboard" isLink></van-cell>
     </van-cell-group>
+    <view class="mst-block-cell__title"></view>
   </scroll-view>
   <view class="mst-dashboard-btn__fixed">
-    anniu
+    <view class="mst-dashboard-btn__release" wx:if="{{true}}">
+      <text>结束调查</text>
+      <text style="font-size:10px;">截止时间：08:13</text>
+    </view>
+    <block wx:else>
+      <view class="mst-dashboard-btn__del">删除</view>
+      <view class="mst-dashboard-btn__release">发布项目</view>
+    </block>
   </view>
 </van-popup>
+
+<van-popup></van-popup>
+
+<!-- 设置用户是否为星标用户，以及加入黑名单等。-->
+<van-action-sheet show="{{ actionSheetShow }}" actions="{{ actions }}" bind:close="onClose" bind:select="onSelect" bind:cancel="onActionSheetsCancel" cancel-text="取消" />
