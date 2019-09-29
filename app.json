@@ -1,7 +1,7 @@
 {
   "pages": [
-    "pages/chat/chat",
     "pages/index/index",
+    "pages/chat/chat",
     "pages/qrcode/qrcode"
   ],
   "window": {

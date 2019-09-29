@@ -15,6 +15,7 @@
     "van-button":"vant-weapp/button/index",
     "van-row": "vant-weapp/row/index",
     "van-col": "vant-weapp/col/index",
-    "van-action-sheet": "vant-weapp/action-sheet/index"
+    "van-action-sheet": "vant-weapp/action-sheet/index",
+    "mst-chat-message":"../../component/chat-message/index"
   }
 }

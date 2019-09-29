@@ -90,7 +90,7 @@ Page({
   onSelect(event) {
     console.log(event.detail);
   },
-  onActionSheetsCancel(){
+  onActionSheetsCancel() {
     this.setData({
       actionSheetShow: false
     });
@@ -171,6 +171,28 @@ Page({
         }
       }
     });
+  },
+  showPrivateChat() {
+    wx.setNavigationBarColor({
+      frontColor: '#ffffff',
+      backgroundColor: '#494949',
+      animation: {
+        duration: 200,
+        timingFunc: 'linear'
+      }
+    })
+    this.setData({
+      atshow: true
+    })
+  },
+  onAtClose() {
+    wx.setNavigationBarColor({
+      frontColor: '#000000',
+      backgroundColor: '#f6f6f6'
+    })
+    this.setData({
+      atshow: false
+    })
   },
   setClipboard() {
     wx.setClipboardData({

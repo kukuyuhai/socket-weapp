@@ -1,0 +1,2 @@
+<!--component/chat-message/index.wxml-->
+<view>component/{{content}}</view>

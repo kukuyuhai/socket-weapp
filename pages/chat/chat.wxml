@@ -11,22 +11,24 @@
 <!-- @联系人列表结束 -->
 
 <view class="mst-container" style="{{display ? 'display:block;' : 'display:none;'}}">
-  <view class="mst-chatroom-container">
-    <view class="mst-focus-content">
-      <view class="mst-focus-left__block">
-        <view class="mst-left__block-item">
-          <van-icon name="star-o" size="18"></van-icon>
-        </view>
-        <view class="mst-left__block-item">
-          <van-icon name="manager-o" size="18" />
-        </view>
-        <view class="mst-left__block-item">
-          <van-icon name="star-o" size="18"></van-icon>
-        </view>
+  <view class="mst-focus-content">
+    <view class="mst-focus-left__block">
+      <view class="mst-left__block-item" bind:tap="showPrivateChat">
+        <van-icon name="star-o" size="22"></van-icon>
       </view>
-      <van-icon name="ellipsis" class="van-focus__icon" size="24" bind:click="showEditContent" />
+      <view class="mst-left__block-item">
+        <van-icon name="manager-o" size="22" />
+      </view>
+      <view class="mst-left__block-item">
+        <van-icon name="bulb-o" size="22"></van-icon>
+      </view>
     </view>
+    <van-icon name="ellipsis" class="van-focus__icon" size="24" bind:click="showEditContent" />
   </view>
+  <!-- 聊天室图文主要内容 -->
+  <scroll-view scroll-y class="mst-waterfull-content">
+    <mst-chat-message wx:for="{{88}}" wx:for-item="t" content="{{index}}"></mst-chat-message>
+  </scroll-view>
   <view class="mst-chatroom-bottom">
     <van-field value="{{ value }}" class="mst-chatroom-input" confirm-hold="{{ true }}" type="text" placeholder="说点什么" border="{{ false }}" confirm-type="发送" bind:confirm="onInputConfirm" bind:change="onInputChange" />
     <van-icon size="24px" color="#666" name="add-o" class="van-field__icon-root" bind:click="bindShowActionSheets" />
@@ -36,9 +38,17 @@
 
 <!-- actions -->
 <van-popup show="{{ show }}" position="bottom" custom-style="padding:20px 0;" round bind:close="onClose">
-  <van-grid gutter="{{ 10 }}" border="{{false}}">
-    <van-grid-item icon="photo-o" text="文字" wx:for="{{ 8 }}" wx:key="index" />
-  </van-grid>
+  <swiper indicator-dots="{{true}}" circular="{{true}}" style="height:180px;" indicator-active-color="rgba(77, 155, 255, 0.6)">
+    <swiper-item>
+      <van-grid gutter="{{ 10 }}" border="{{false}}">
+        <van-grid-item icon="photo-o" text="相册" />
+        <van-grid-item icon="photo-o" text="拍照" />
+        <van-grid-item icon="photo-o" text="视频" />
+        <van-grid-item icon="photo-o" text="签到" />
+        <van-grid-item icon="photo-o" text="投票" />
+      </van-grid>
+    </swiper-item>
+  </swiper>
 </van-popup>
 
 <!-- right Edit -->
@@ -51,15 +61,14 @@
       </van-cell>
       <van-cell title="项目公告" value="" label="描述信息" border="{{ false }}" />
     </van-cell-group>
-    <view class="mst-block-cell__group" style="justify-content:space-around;margin-top:10px;">
-      <van-row>
-        <van-col span="4" wx:for="{{23}}">
-          <view class="mst-group-userinfo" bindtap="settingUserAttr">
-            <image class="mst-group-avatar" src="https://wx.qlogo.cn/mmopen/vi_32/Q0j4TwGTfTLGy0iaWoybEHhKcx6XQUt6ZWlTpdbEvq6QibG8VEkGLP7c0mXwsJLoeAIUuxyAwEzpeHcIlvSQ2rUw/132"></image>
-            <text class="mst-group-nickname">walker</text>
-          </view>
-        </van-col>
-      </van-row>
+    <!-- 加入会员列表 -->
+    <view style="background-color:#fff;padding:10px 15px;margin-top:10px;">
+      <view class="mst-block-cell__g">
+        <view class="mst-group-userinfo" wx:for="{{23}}" bindtap="settingUserAttr">
+          <image class="mst-group-avatar" src="https://wx.qlogo.cn/mmopen/vi_32/Q0j4TwGTfTLGy0iaWoybEHhKcx6XQUt6ZWlTpdbEvq6QibG8VEkGLP7c0mXwsJLoeAIUuxyAwEzpeHcIlvSQ2rUw/132"></image>
+          <text class="mst-group-nickname">walker</text>
+        </view>
+      </view>
       <view class="mst-group-user__more">查看更多成员 ></view>
     </view>
     <van-cell-group title="邀请主持人">
@@ -93,8 +102,27 @@
     </block>
   </view>
 </van-popup>
-
-<van-popup></van-popup>
+<!-- @私聊某人的全部回复内容 -->
+<van-popup overlay="{{true}}" show="{{ atshow }}" safe-area-inset-top safe-area-inset-bottom position="bottom" custom-class="bottom" bind:close="onAtClose">
+  <view class="mst-private__header van-hairline--bottom" bind:tap="onAtClose">
+    <view class="mst-private__header-title">@ 提醒</view>
+    <van-icon name="arrow-down" color="#666" size="16px" custom-style="margin-right:14px;"></van-icon>
+  </view>
+  <scroll-view scroll-y class="mst-private-content">
+    <view class="mst-private__listItem" wx:for="{{26}}">
+      <image src="https://wx.qlogo.cn/mmopen/vi_32/Q0j4TwGTfTLGy0iaWoybEHhKcx6XQUt6ZWlTpdbEvq6QibG8VEkGLP7c0mXwsJLoeAIUuxyAwEzpeHcIlvSQ2rUw/132" mode="asceptFill" class="mst-useravatar"></image>
+      <view class="mst-private__listItem-record van-hairline--bottom">
+        <view class="mst-private__listItem--info">
+          <text>walker</text>
+          <text style="font-size:14px;color:#999;">18:16</text>
+        </view>
+        <view class="mst-private__listItem--last">
+          两者基于相同的视觉规范，提供一致的 API 接口，助力开发者快速搭建小程序应用
+        </view>
+      </view>
+    </view>
+  </scroll-view>
+</van-popup>
 
 <!-- 设置用户是否为星标用户，以及加入黑名单等。-->
 <van-action-sheet show="{{ actionSheetShow }}" actions="{{ actions }}" bind:close="onClose" bind:select="onSelect" bind:cancel="onActionSheetsCancel" cancel-text="取消" />

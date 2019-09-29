@@ -1,18 +1,27 @@
 /* pages/chat/chat.wxss */
 
 page {
+  background-color: #f6f6f6;
   padding-top: constant(safe-area-inset-top);
   padding-left: constant(safe-area-inset-left);
   padding-right: constant(safe-area-inset-right);
   padding-bottom: constant(safe-area-inset-bottom);
+  height: 100%;
+  width: 100%;
 }
 
 .mst-focus-content {
   background-color: #f6f6f6;
-  padding: 10rpx 0;
   display: flex;
   align-items: center;
   width: 100%;
+  height: 48px;
+}
+
+.mst-waterfull-content{
+  height: calc(100vh - 116px);
+  overflow: hidden;
+  background: #ededed;
 }
 
 .mst-focus-left__block {
@@ -23,16 +32,19 @@ page {
 }
 
 .mst-left__block-item {
-  height: 100%;
-  width: 32px;
+  width: 76rpx;
   display: flex;
   align-items: center;
   justify-content: center;
+  height: 48px;
 }
 
 .van-focus__icon {
-  margin-top: 8px;
-  padding: 0 10px;
+  height: 48px;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  width: 80rpx;
 }
 
 .mst-chatroom-container {
@@ -75,20 +87,31 @@ page {
 
 .mst-block-cell__group {
   padding: 10px 15px;
-  display: flex;
-  align-items: center;
   background-color: #fff;
+  display: flex;
   flex-wrap: wrap;
+}
+
+.mst-block-cell__g:after{
+  content: "";
+  clear: both;
+  display: block;
+  visibility: hidden;
 }
 
 .mst-group-userinfo {
   margin: 12rpx auto;
-  text-align: center;
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
+  width:20%;
+  float: left;
 }
 
 .mst-group-avatar {
-  width: 80rpx;
-  height: 80rpx;
+  width: 100rpx;
+  height: 100rpx;
   border-radius: 8rpx;
 }
 
@@ -113,6 +136,7 @@ page {
   height: 84rpx;
   border-radius: 50%;
   margin-right: 10rpx;
+  margin-bottom: 10rpx;
 }
 
 .mst-dashed-round {
@@ -137,6 +161,10 @@ page {
   background-color: #f1f2f3 !important;
 }
 
+.bottom {
+  height: 95vh;
+}
+
 .mst-dashboard-btn__fixed {
   color: #fff;
   line-height: 48px;
@@ -146,16 +174,16 @@ page {
   align-items: center;
 }
 
-.mst-dashboard-btn__fixed view{
+.mst-dashboard-btn__fixed view {
   text-align: center;
 }
 
-.mst-dashboard-btn__del{
+.mst-dashboard-btn__del {
   flex-basis: 200rpx;
   background-color: #f6573a;
 }
 
-.mst-dashboard-btn__release{
+.mst-dashboard-btn__release {
   flex: 1;
   background-color: rgba(77, 155, 255, 0.6);
   display: flex;
@@ -180,7 +208,7 @@ page {
   height: calc(100vh - 68px);
 }
 
-.mst-index-container, page {
+.mst-index-container {
   height: 100%;
   width: 100%;
   background-color: #fff;
@@ -193,4 +221,47 @@ page {
 
 .van-popup--bottom {
   border-radius: 20px 20px 0 0;
+}
+
+.mst-private__header {
+  display: flex;
+  flex-direction: row;
+  align-items: center;
+  padding: 10px 0;
+  position: relative;
+  top: -20px;
+}
+
+.mst-private-content{
+  height: calc(95vh - 60px);
+}
+
+.mst-private__header-title {
+  flex: 1;
+  text-align: center;
+  font-size: 16px;
+}
+
+.mst-private__listItem {
+  display: flex;
+  flex-direction: row;
+  padding: 15px 10px;
+}
+
+.mst-private__listItem-record {
+  flex: 1;
+  margin-left: 10px;
+}
+
+.mst-private__listItem--info {
+  display: flex;
+  justify-content: space-between;
+  font-size: 16px;
+}
+
+.mst-private__listItem--last {
+  margin-top: 10rpx;
+  margin-bottom: 10rpx;
+  color: #666;
+  font-size: 14px;
 }
