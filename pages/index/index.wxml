@@ -1,13 +1,11 @@
 <!--index.wxml-->
-<view class="container">
-  <view class="userinfo">
-    <button wx:if="{{!hasUserInfo && canIUse}}" open-type="getUserInfo" bindgetuserinfo="getUserInfo"> 获取头像昵称 </button>
-    <block wx:else>
-      <image bindtap="bindViewTap" class="userinfo-avatar" src="{{userInfo.avatarUrl}}" mode="cover"></image>
-      <text class="userinfo-nickname">{{userInfo.nickName}}</text>
-    </block>
-  </view>
-  <view class="usermotto">
-    <navigator class="user-motto" url="/pages/chat/chat">跳转至聊天室</navigator>
+<view class="mst-create__wrapper">
+  <image src="/assets/images/list.png" style="width:375px;height:265px;"></image>
+  <view class="mst-create-btn">
+    <van-button color="#8ebdfa" size="large" open-type="getUserInfo" bind:getuserinfo="getUserInfo">点击创建</van-button>
+    <view class="mst-create-others">
+      <van-button color="#5d7599" open-type="feedback" custom-style="width:40vw;" plain>问题反馈</van-button>
+      <van-button color="#e1babf" custom-style="width:40vw;" bind:click="navigateToUrl">演示项目</van-button>
+    </view>
   </view>
 </view>

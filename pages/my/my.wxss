@@ -1,0 +1,27 @@
+/* pages/my/my.wxss */
+
+.userinfo {
+  display: flex;
+  flex-direction: row;
+  align-items: center;
+  padding: 20rpx;
+}
+
+.userinfo-avatar {
+  width: 96rpx;
+  height: 96rpx;
+  margin: 20rpx;
+  border-radius: 50%;
+  border: 3px solid #e9bd6c;
+}
+
+.userinfo-nickname {
+  color: #e9bd6c;
+  font-size: 18px;
+}
+
+.mst-topic-list{
+  height: 160rpx;
+  line-height: 160rpx;
+  padding: 20rpx 15px;
+}

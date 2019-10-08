@@ -2,7 +2,14 @@
   "pages": [
     "pages/index/index",
     "pages/chat/chat",
-    "pages/qrcode/qrcode"
+    "pages/qrcode/qrcode",
+    "pages/library/library",
+    "pages/surveys/create/index",
+    "pages/surveys/analysis/index",
+    "pages/surveys/details/index",
+    "pages/tools/vote/index",
+    "pages/tools/scan/index",
+    "pages/my/my"
   ],
   "window": {
     "backgroundTextStyle": "light",
@@ -10,5 +17,32 @@
     "navigationBarTitleText": "WeChat",
     "navigationBarTextStyle": "black"
   },
+  "tabBar": {
+    "color": "#888888",
+    "selectedColor": "#04BE02",
+    "borderStyle": "white",
+    "backgroundColor": "#f7f7f8",
+    "list": [
+      {
+        "pagePath": "pages/index/index",
+        "iconPath": "assets/images/iconfont-demo.png",
+        "selectedIconPath": "assets/images/iconfont-demo-active.png",
+        "text": "创建"
+      },
+      {
+        "pagePath": "pages/library/library",
+        "iconPath": "assets/images/iconfont-demo.png",
+        "selectedIconPath": "assets/images/iconfont-demo-active.png",
+        "text": "素材库"
+      },
+      {
+        "pagePath": "pages/my/my",
+        "iconPath": "assets/images/iconfont-about.png",
+        "selectedIconPath": "assets/images/iconfont-about-active.png",
+        "text": "我的"
+      }
+    ]
+  },
+  "debug": false,
   "sitemapLocation": "sitemap.json"
 }

@@ -1,0 +1,16 @@
+<!--index.wxml-->
+<view class="">
+  <view class="userinfo">
+    <button wx:if="{{!hasUserInfo && canIUse}}" open-type="getUserInfo" bindgetuserinfo="getUserInfo"> 获取头像昵称 </button>
+    <block wx:else>
+      <image bindtap="bindViewTap" class="userinfo-avatar" src="{{userInfo.avatarUrl}}" mode="cover"></image>
+      <text class="userinfo-nickname">{{ userInfo.nickName }}</text>
+    </block>
+  </view>
+  <van-tabs animated border="{{false}}" line-width="30" sticky color="#1989fa">
+    <van-tab title="我所创建的">
+      <view wx:for="{{30}}" wx:key="" class="mst-topic-list"></view>
+    </van-tab>
+    <van-tab title="我所参与的">内容 2</van-tab>
+  </van-tabs>
+</view>

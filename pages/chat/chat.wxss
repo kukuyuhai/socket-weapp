@@ -21,7 +21,7 @@ page {
 .mst-waterfull-content{
   height: calc(100vh - 116px);
   overflow: hidden;
-  background: #ededed;
+  background: #fefefe;
 }
 
 .mst-focus-left__block {
