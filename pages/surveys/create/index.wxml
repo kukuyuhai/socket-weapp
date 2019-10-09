@@ -1,2 +1,62 @@
 <!--pages/surveys/create/index.wxml-->
-<text>pages/surveys/create/index.wxml</text>
+<view>
+  <view class="mst-survey-wrapper">
+    <view class="mst-survey-thumb">
+      <view></view>
+    </view>
+    <view class="mst-survey-title van-hairline--bottom">
+      <van-field value="{{ value }}" maxlength="20" clearable input-class="mst-input-class" size="large" placeholder="标题 （20个字）" border="{{ false }}" bind:change="onChange" />
+    </view>
+    <view class="mst-survey-desc">
+      <van-field value="{{ value1 }}" size="large" input-class="mst-input-textarea" placeholder="希望您抽出几分钟的时间，共同分享对于这个话题的看法，让我们马上开始吧！" border="{{ false }}" type="textarea" autosize bind:change="onChange" />
+    </view>
+  </view>
+  <!-- 设置配置项cells -->
+  <van-cell-group title=" ">
+    <van-cell title="是否群聊" custom-class="mst-switch-cell">
+      <van-switch checked="{{ checked }}" active-color="#8ebdfa" custom-class="mst-switch-cell__switch" />
+    </van-cell>
+    <van-cell title="参与用户是否绑定手机号" custom-class="mst-switch-cell">
+      <van-switch checked="{{ checked }}" active-color="#8ebdfa" custom-class="mst-switch-cell__switch" bind:change="onSwitchChange" />
+    </van-cell>
+    <van-cell title="私密房间" custom-class="mst-switch-cell">
+      <van-switch checked="{{ checked }}" active-color="#8ebdfa" custom-class="mst-switch-cell__switch" bind:change="onSwitchChange" />
+    </van-cell>
+    <van-cell title="开始时间" custom-class="mst-switch-cell" is-link>
+      <text data-evn="yearPicker" bind:tap="onShowPopUp">{{ currentDateVal }}</text>
+      <text data-evn="hourPicker" bind:tap="onShowPopUp" style="margin-left:6px;">{{ currentHours }}</text>
+    </van-cell>
+    <van-cell title="预计时长" custom-class="mst-switch-cell" value="{{ duration }}" is-link bind:click="showActionsheets"></van-cell>
+  </van-cell-group>
+
+  <van-panel title="关键词" custom-class="mst-panel__content" desc="添加关键词信息，帮助您更好查看用户讨论反馈信息。">
+    <view class="mst-panel__box">
+      <van-tag type="success" wx:for="{{tagGroup}}" wx:key="" custom-class="mst-tag" size="large">{{item}}</van-tag>
+      <van-tag custom-class="mst-tag" plain size="large" bindtap="addTag">添加</van-tag>
+    </view>
+  </van-panel>
+  <view style="padding:15px 10px 20px;">
+    <van-button color="#666666" size="large">点击创建</van-button>
+  </view>
+</view>
+<!-- 日期选择 -->
+<van-popup show="{{yearPicker}}" position="bottom">
+  <van-datetime-picker type="date" value="{{ currentDate }}" data-evn="yearPicker" min-date="{{ minDate }}" max-date="{{ maxDate }}" bind:confirm="onConfirmDate" bind:cancel="onClosePopup" />
+</van-popup>
+<!-- 时间选择 -->
+<van-popup show="{{hourPicker}}" position="bottom">
+  <van-datetime-picker type="time" value="{{ currentHours }}" data-evn="hourPicker" min-hour="{{ minHour }}" max-hour="{{ maxHour }}" bind:confirm="onConfirmTime" bind:cancel="onClosePopup" />
+</van-popup>
+
+<!-- 关键词添加 -->
+<van-popup show="{{tag}}">
+  <view class="mst-tag-content">
+    <van-field value="{{ tagText }}" type="textarea" custom-style="width:280px;" autosize placeholder="多个关键词请用，(中文)隔开" border="{{ false }}" bind:input="onInputTagText" />
+    <view style="margin-top:10px;">
+      <van-button type="primary" size="small" bind:click="onCloseTag">点击创建</van-button>
+    </view>
+  </view>
+</van-popup>
+
+
+<van-action-sheet show="{{ show }}" actions="{{ actions }}" bind:close="onClose" bind:cancel="onClose" bind:select="onSelect" cancel-text="取消" />

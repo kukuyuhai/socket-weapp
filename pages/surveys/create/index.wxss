@@ -1,1 +1,60 @@
 /* pages/surveys/create/index.wxss */
+
+page {
+  background-color: #f1f2f3;
+}
+
+.mst-survey-wrapper {
+  padding: 10px 0;
+  background: #fff;
+}
+
+.mst-input-class {
+  font-size: 18px;
+  height: 32px !important;
+  line-height: 32px !important;
+  width: 100%;
+  font-weight: 500;
+}
+
+.mst-input-textarea {
+  height: 42px !important;
+  min-height: 42px !important;
+}
+
+.mst-panel__content {
+  margin-top: 20px;
+}
+
+.mst-panel__box {
+  padding: 10px 15px 10px;
+  display: flex;
+  flex-wrap: wrap;
+  justify-content: flex-start;
+}
+
+.mst-tag {
+  margin: 4px 6px !important;
+}
+
+.mst-tag-add {
+  display: inline-block;
+  padding: 0.2em 0.5em;
+  font-size: 14px;
+  line-height: normal;
+  border-radius: 0.2em;
+  color: #333;
+  color: var(--white, #333);
+  border:1px solid #333;
+}
+
+.mst-tag-content{
+  width: 300px;
+  min-height: 120px;
+  display: flex;
+  flex-direction:column;
+  justify-content: center;
+  align-items: center; 
+  padding: 20px;
+  box-sizing: border-box;
+}
